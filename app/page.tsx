@@ -1,8 +1,8 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
     <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-obsidian">
+      {/* Fallback structural gradient (shows if video is missing or loading) */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-obsidian via-[#14120E] to-obsidian" />
       {/* Video Background */}
       <video
         className="absolute inset-0 w-full h-full object-cover"

@@ -55,7 +55,9 @@ const budgetCards = [
   { id: "10-25", label: "$10k – $25k" },
   { id: "25-50", label: "$25k – $50k" },
   { id: "100+", label: "$100k+" },
-];
+] as const;
+
+type BudgetTier = (typeof budgetCards)[number]["id"];
 
 export default function ApplyForm() {
   const methods = useForm<FormValues>({
@@ -65,6 +67,10 @@ export default function ApplyForm() {
   const { handleSubmit, trigger, formState, setValue, getValues } = methods;
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+
+  const handleBudgetSelect = (id: BudgetTier) => {
+    setValue("budget", id);
+  };
 
   // -----------------------------------------------------------------------
   // Submit – send JSON to our serverless route
@@ -160,7 +166,7 @@ export default function ApplyForm() {
                 <button
                   type="button"
                   key={c.id}
-                  onClick={() => setValue("budget", c.id as any)}
+                  onClick={() => handleBudgetSelect(c.id)}
                   className={`border-2 rounded py-4 text-center font-body transition-colors ${
                     getValues("budget") === c.id
                       ? "border-champagne bg-champagne text-obsidian"
