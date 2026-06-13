@@ -1,17 +1,8 @@
 export default function Home() {
   return (
     <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-obsidian">
-      {/* Fallback structural gradient (shows if video is missing or loading) */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-obsidian via-[#14120E] to-obsidian" />
-      {/* Video Background */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        src="/hero.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+      {/* Gradient Background */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 to-black" />
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
       {/* Content */}

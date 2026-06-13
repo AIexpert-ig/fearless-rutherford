@@ -18,6 +18,22 @@ interface SubmitPayload {
 }
 
 export async function POST(request: Request) {
+  const requiredEnvVars = [
+    'HUBSPOT_API_KEY',
+    'TWILIO_ACCOUNT_SID',
+    'TWILIO_AUTH_TOKEN',
+    'TWILIO_WHATSAPP_FROM',
+    'ADMIN_WHATSAPP_TO',
+  ];
+  const missingVars = requiredEnvVars.filter(v => !process.env[v]);
+  if (missingVars.length > 0) {
+    console.error("Missing environment variables:", missingVars);
+    return Response.json(
+      { error: 'Server configuration error', missing_env: missingVars },
+      { status: 500 }
+    );
+  }
+
   try {
     const data: SubmitPayload = await request.json();
 
